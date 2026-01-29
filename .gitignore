@@ -1,0 +1,10 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Environment variables (ÇOK ÖNEMLİ - ŞİFRELER GİTMESİN)
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db

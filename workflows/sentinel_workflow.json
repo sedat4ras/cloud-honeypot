@@ -1,0 +1,112 @@
+{
+  "name": "sentinel_workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sentinel-avci",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b58a1c2d-86e7-4e30-afcb-a2abbd145327",
+      "name": "Webhook",
+      "webhookId": "22fab0d8-7496-4149-89d7-ecd6c9ffda65"
+    },
+    {
+      "parameters": {
+        "chatId": "Your-Telegram-Chat-ID",
+        "text": "=🚨 *SENTINEL ATTACK ALLERT* 🚨\n━━━━━━━━━━━━━━━━━━━━\n👤 *Case:*\n\n{{ $json.output[0].content[0].text }}\n━━━━━━━━━━━━━━━━━━━━",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        576,
+        0
+      ],
+      "id": "c2605700-2ed8-466a-89c5-249e3fc6f9d9",
+      "name": "Send a text message",
+      "webhookId": "c69d2f7f-735a-431e-910b-b02c6bb61682",
+      "credentials": {
+        "telegramApi": {
+          "id": "JvCVW9jLGSplzsI7",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "chatgpt-4o-latest",
+          "mode": "list",
+          "cachedResultName": "CHATGPT-4O-LATEST"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=\"You are a Senior Cyber Security Analyst. Your mission is to analyze SSH Honeypot (Cowrie) logs.\n\nAnalysis Rules:\n\nIdentify the attacker's IP address and specific actions (CMD, SFTP, etc.).\n\nDetermine the attacker's intent (Brute-force, file upload, system reconnaissance).\n\nFlag actions like mkdir, WRITE, or file downloads as 'CRITICAL ACTION'.\n\nAlways provide the response in a professional, clear, and structured English format, simplifying technical jargon where possible.\"\n\nIntrusion attempt detected! New session data received for analysis:\n\n🌍 Location: {{ $json.headers[\"cf-ipcountry\"] }}\n🌐 Attacker IP: {{ $json.body.ip }}\n📊 Event Count: {{ $json.body.event_count }}\n\n📝 Activity Logs:\n{{ $json.body.full_logs }}\n\nPlease analyze these logs. Summarize the attacker's identity, actions taken, and their primary intent (reconnaissance, infiltration, directory creation, etc.) in a detailed security report."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "59299f85-f087-4f40-b573-82c695708cb3",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "mU4eWfWAuP6DoHUg",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d4fc1b54-434c-41b3-83db-00f61b4e8930",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "43df8f59b4d820b48b7ff5f5b92bafb1af469489d3ac09a801a523278af6c64e"
+  },
+  "id": "OwZMaerUqhnEyK1E",
+  "tags": []
+}
