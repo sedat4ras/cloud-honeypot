@@ -17,12 +17,13 @@ By leveraging a **Session Buffering Architecture** and an **AI Agent (LLM)**, Se
 The system operates on a closed-loop "Trap, Analyze, Report" workflow:
 
 ```mermaid
+
 graph LR
     A[Attacker] -->|SSH Connection| B(AWS EC2 / Cowrie Honeypot)
     B -->|Raw Logs| C[Python Log Monitor]
     C -->|Aggregated Session Data| D{n8n Cloud Workflow}
     D -->|Context & Intent| E[OpenAI AI Analyst]
-    E -->|Threat Report| F[Telegram Alert]'''
+    E -->|Threat Report| F[Telegram Alert]
 
     Core Features
 1. Advanced Honeypot Infrastructure
