@@ -16,7 +16,7 @@ By leveraging a **Session Buffering Architecture** and an **AI Agent (LLM)**, Se
 
 The system operates on a closed-loop "Trap, Analyze, Report" workflow:
 
-
+```mermaid
 graph LR
     A[Attacker] -->|SSH Connection| B(AWS EC2 / Cowrie Honeypot)
     B -->|Raw Logs| C[Python Log Monitor]
