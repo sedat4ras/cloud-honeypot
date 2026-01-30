@@ -141,7 +141,7 @@ Visual workflow demonstrating the data pipeline: `Webhook -> OpenAI Analysis -> 
 
 Live dashboard showing the Python script capturing attacker sessions from the Dockerized Honeypot in real-time.
 
-![Terminal Output](assets/
+![Terminal Output](assets/terminal-output.png)
 
 
 ## ⚠️ Disclaimer & Legal Notice
