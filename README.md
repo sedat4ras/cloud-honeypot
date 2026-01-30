@@ -24,28 +24,29 @@ graph LR
     D -->|Context & Intent| E[OpenAI AI Analyst]
     E -->|Threat Report| F[Telegram Alert]
 ```
-   
-    Core Features
-1. Advanced Honeypot Infrastructure
-Dockerized Cowrie: Deployed on AWS EC2, acting as a high-interaction trap.
+## 🛡️ Core Features
 
-Port Manipulation: The system redirects attackers from standard ports to an isolated environment, capturing keystrokes, downloaded files, and command history safely.
+### 1. Advanced Honeypot Infrastructure
+* **Dockerized Cowrie:** Deployed on **AWS EC2**, acting as a high-interaction trap to simulate a vulnerable SSH/Telnet environment.
+* **Port Manipulation:** Redirects attackers from standard ports to an isolated environment, safely capturing:
+    * Keystrokes & Command History
+    * Downloaded Malware/Files
+    * Session Metadata
 
-2. AI-Driven Analysis
-Intent Recognition: Integrated OpenAI Agent analyzes command chains to categorize attacks (e.g., Reconnaissance, Crypto-mining, Botnet Injection).
+### 2. AI-Driven Analysis
+* **Intent Recognition:** An integrated **OpenAI Agent** analyzes command chains to categorize attacks (e.g., Reconnaissance, Crypto-mining, Botnet Injection).
+* **Noise Reduction:** Automatically filters out generic automated scripts/bots to focus on complex, human-operated intrusion attempts.
 
-Noise Reduction: Filters out generic automated scripts to focus on complex, human-operated intrusion attempts.
+### 3. Cost & Performance Optimization (v2)
+* **Edge Buffering:** Implemented a custom **Python-based Session Buffering Algorithm**.
+* **Logic:** To minimize latency and API costs, the system:
+    * Aggregates logs by **Session ID**.
+    * Waits for a **120-second idle period** before transmitting data.
+    * Sends a single, comprehensive payload to n8n instead of multiple individual log lines.
 
-3. Cost & Performance Optimization (v2)
-Edge Buffering: Implemented a Python-based Session Buffering Algorithm.
-
-Logic: Instead of triggering cloud workflows for every single log line (which increases latency and API costs), the system aggregates logs by Session ID. It waits for a 120-second idle period before transmitting a single, comprehensive payload.
-
-4. Security Standards
-Sanitized Pipelines: No hardcoded credentials. All secrets are managed via environment variables (.env).
-
-Automated Alerting: Instant delivery of structured security reports via Telegram.
-
+### 4. Security & Automation
+* **Sanitized Pipelines:** Zero hardcoded credentials; all secrets are managed via environment variables (`.env`).
+* **Automated Alerting:** Delivers structured security reports and threat intelligence instantly via **Telegram**.
 Sentinel-Project/
 ├── src/
 │   └── log_monitor.py        # Python script for edge buffering & transmission
@@ -71,17 +72,22 @@ Initialize the Cowrie container to start listening on port 2222.
 ```bash
 cd deployment
 docker-compose up -d
+``` 
 
 2. Configure Environment
 Create a .env file in the root directory to store your sensitive webhook URL.
+```bash
 cp .env.example .env
 nano .env
+```
 Add your specific n8n Webhook URL inside the file.
 
 3. Start the Monitor
 Install dependencies and run the monitoring script.
+```
 pip install -r requirements.txt
 python src/log_monitor.py
+```
 
 Engineering Challenges & Solutions
 Challenge: API Rate Limiting & Cost
