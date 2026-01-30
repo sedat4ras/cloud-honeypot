@@ -23,7 +23,8 @@ graph LR
     C -->|Aggregated Session Data| D{n8n Cloud Workflow}
     D -->|Context & Intent| E[OpenAI AI Analyst]
     E -->|Threat Report| F[Telegram Alert]
-
+```
+   
     Core Features
 1. Advanced Honeypot Infrastructure
 Dockerized Cowrie: Deployed on AWS EC2, acting as a high-interaction trap.
